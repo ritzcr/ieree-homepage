@@ -1,24 +1,102 @@
 import Link from "next/link";
+import Image from "next/image";
+import Script from "next/script";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "イエリーの仲介手数料はいくらですか？",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "自分でお部屋を見つけた場合は仲介手数料0円（広告料のある物件）または賃料0.3ヶ月分（税別・広告料のない物件）です。イエリーがお部屋を探す場合は賃料0.5ヶ月分（税別）です。一般的な不動産会社の1ヶ月分と比べて最大100%の節約になります。",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "他社で内見・申込した物件を契約できますか？",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "マナー違反でございますので、お断りさせて頂いております。他社でご相談中の物件を弊社経由に切り替えた場合、結果的にお客様の契約に支障をきたす可能性があります。",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "内見前の先行申込はできますか？",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "物件に応じて可能でございます。入居確度の低いものや合理的な事情がないものは貸主・弊社の負担を考え、お断りしております。",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "賃料発生日・初期費用の交渉は可能でしょうか？",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "ご要望にお応えできるよう努めさせていただきます。合理的な範囲を超えた要望はお受けしておりません。繁忙期など交渉を全くできないケースもございますので、予算に余裕を持ったお引越しのご検討をお願い致します。",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "どんな物件が紹介可能でしょうか？",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "基本的にどの不動産会社も宅建業者がアクセスできるレインズ・atbbという業者間データベースから物件を探しています。そのデータベースに掲載されていれば、ご紹介可能です。一部、特定の不動産会社でしか扱えない物件がございますので、予めご了承ください。",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "対応エリアはどこですか？",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "東京23区内の賃貸物件に対応しています。管理費込み賃料が1人入居の場合9万円以上、2人入居の場合14万円以上、3人以上入居の場合18万円以上が条件となります。",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "なぜ仲介手数料を安くできるのですか？",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "イエリーは駅前の目立つ店舗を構えず、格安の事務所からオンラインで集客しています。また、貸主から広告料を受け取れる物件では仲介手数料を0円にしています。固定費の削減分をお客様に還元することで、安い仲介手数料を実現しています。",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "外国語での対応は可能ですか？",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "はい。日本語と繁体字中国語（台湾華語）に対応しています。台湾出身のスタッフが在籍しており、契約書の説明から入居後のサポートまで母語で対応可能です。",
+      },
+    },
+  ],
+};
 
 export default function Home() {
   return (
     <>
+      <Script
+        id="json-ld-faq"
+        type="application/ld+json"
+        strategy="afterInteractive"
+      >
+        {JSON.stringify(faqJsonLd)}
+      </Script>
       <Header />
       <main className="pt-16">
         {/* Hero Section */}
         <section className="py-12 px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">イエリー</h1>
-          <p className="text-lg mb-2">自分でお部屋を探すと</p>
-          <p className="text-2xl font-bold mb-6">仲介手数料</p>
-          <div className="flex items-center justify-center gap-2 text-4xl md:text-5xl font-black mb-8">
-            <span className="text-5xl md:text-6xl">0</span>
-            <span className="text-xl">円</span>
-            <span className="text-xl">or 税別</span>
-            <span className="text-5xl md:text-6xl">0.3</span>
-            <span className="text-xl">ヶ月</span>
-          </div>
+          <Image
+            src="/images/hero.webp"
+            alt="イエリー"
+            width={400}
+            height={143}
+            className="mx-auto mb-6"
+            priority
+          />
           <Link
             href="https://lin.ee/RcmX68V"
             target="_blank"
@@ -46,15 +124,13 @@ export default function Home() {
               <div className="bg-[#F5C83C] -mx-6 -mt-6 px-6 py-3 mb-4 rounded-t-md">
                 <p className="font-bold text-center">①お客様がお部屋を探す場合</p>
               </div>
-              <div className="text-center mb-4">
-                <p className="text-sm mb-2">仲介手数料</p>
-                <div className="flex items-center justify-center gap-2">
-                  <span className="text-5xl font-black">０</span>
-                  <span className="text-lg">円 or 税別</span>
-                  <span className="text-5xl font-black">０.３</span>
-                  <span className="text-lg">ヶ月</span>
-                </div>
-              </div>
+              <Image
+                src="/images/option1.webp"
+                alt="仲介手数料 0円 or 税別 0.3ヶ月"
+                width={662}
+                height={253}
+                className="w-full mb-4"
+              />
               <p className="font-bold mb-2">お客様イメージ</p>
               <ul className="text-sm space-y-1">
                 <li>自分でお部屋を探したい方</li>
@@ -68,13 +144,13 @@ export default function Home() {
               <div className="bg-[#F5C83C] -mx-6 -mt-6 px-6 py-3 mb-4 rounded-t-md">
                 <p className="font-bold text-center">②イエリーがお部屋を探す場合</p>
               </div>
-              <div className="text-center mb-4">
-                <p className="text-sm mb-2">仲介手数料 賃料</p>
-                <div className="flex items-center justify-center gap-2">
-                  <span className="text-5xl font-black">０.５</span>
-                  <span className="text-lg">ヶ月分+税</span>
-                </div>
-              </div>
+              <Image
+                src="/images/option2.webp"
+                alt="仲介手数料 賃料 0.5ヶ月分+税"
+                width={667}
+                height={253}
+                className="w-full mb-4"
+              />
               <p className="font-bold mb-2">お客様イメージ</p>
               <ul className="text-sm space-y-1">
                 <li>お部屋探しが苦手な方</li>
@@ -128,15 +204,23 @@ export default function Home() {
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="card text-center">
-                  <p className="text-sm mb-2">広告料のある物件の場合</p>
-                  <p className="text-xs mb-1">仲介手数料</p>
-                  <p className="text-4xl font-black">０<span className="text-lg">円</span></p>
+                <div className="card p-0 overflow-hidden">
+                  <Image
+                    src="/images/price1.webp"
+                    alt="広告料のある物件の場合 仲介手数料0円"
+                    width={689}
+                    height={317}
+                    className="w-full"
+                  />
                 </div>
-                <div className="card text-center">
-                  <p className="text-sm mb-2">広告料のない物件の場合</p>
-                  <p className="text-xs mb-1">仲介手数料 税別</p>
-                  <p className="text-4xl font-black">０.３<span className="text-lg">ヶ月</span></p>
+                <div className="card p-0 overflow-hidden">
+                  <Image
+                    src="/images/price2.webp"
+                    alt="広告料のない物件の場合 仲介手数料税別0.3ヶ月"
+                    width={689}
+                    height={317}
+                    className="w-full"
+                  />
                 </div>
               </div>
             </div>
@@ -174,46 +258,100 @@ export default function Home() {
             </h2>
 
             <div className="space-y-4">
-              <div className="card">
-                <p className="font-bold mb-2">LINE公式アカウント友だち追加</p>
-                <p className="text-sm">
-                  下記のリンクからLINE公式アカウント友だち追加の上、「チャットでお部屋探しを相談」をクリックしてください。
-                </p>
+              <div className="card flex items-start gap-4">
+                <Image
+                  src="/images/flow-icon.webp"
+                  alt=""
+                  width={60}
+                  height={60}
+                  className="flex-shrink-0"
+                />
+                <div>
+                  <p className="font-bold mb-2">LINE公式アカウント友だち追加</p>
+                  <p className="text-sm">
+                    下記のリンクからLINE公式アカウント友だち追加の上、「チャットでお部屋探しを相談」をクリックしてください。
+                  </p>
+                </div>
               </div>
 
-              <div className="card">
-                <p className="font-bold mb-2">お部屋探し</p>
-                <p className="text-sm">
-                  お客様に合った方法をご選択の上、物件探しをしてください。イエリーが物件の募集状況などを確認します。
-                </p>
+              <div className="card flex items-start gap-4">
+                <Image
+                  src="/images/flow-icon.webp"
+                  alt=""
+                  width={60}
+                  height={60}
+                  className="flex-shrink-0"
+                />
+                <div>
+                  <p className="font-bold mb-2">お部屋探し</p>
+                  <p className="text-sm">
+                    お客様に合った方法をご選択の上、物件探しをしてください。イエリーが物件の募集状況などを確認します。
+                  </p>
+                </div>
               </div>
 
-              <div className="card">
-                <p className="font-bold mb-2">内見</p>
-                <p className="text-sm">
-                  気になった物件の内見にご案内します。入居確度が低い物件の内見はご遠慮ください。内見は現地集合、移動は公共交通機関のご利用をお願いしております。
-                </p>
+              <div className="card flex items-start gap-4">
+                <Image
+                  src="/images/flow-icon.webp"
+                  alt=""
+                  width={60}
+                  height={60}
+                  className="flex-shrink-0"
+                />
+                <div>
+                  <p className="font-bold mb-2">内見</p>
+                  <p className="text-sm">
+                    気になった物件の内見にご案内します。入居確度が低い物件の内見はご遠慮ください。内見は現地集合、移動は公共交通機関のご利用をお願いしております。
+                  </p>
+                </div>
               </div>
 
-              <div className="card">
-                <p className="font-bold mb-2">入居審査のお申込</p>
-                <p className="text-sm">
-                  気に入った物件に入居審査のお申し込みをします。物件に応じてお申込方法が異なりますのでイエリーよりご案内させていただきます。
-                </p>
+              <div className="card flex items-start gap-4">
+                <Image
+                  src="/images/flow-icon.webp"
+                  alt=""
+                  width={60}
+                  height={60}
+                  className="flex-shrink-0"
+                />
+                <div>
+                  <p className="font-bold mb-2">入居審査のお申込</p>
+                  <p className="text-sm">
+                    気に入った物件に入居審査のお申し込みをします。物件に応じてお申込方法が異なりますのでイエリーよりご案内させていただきます。
+                  </p>
+                </div>
               </div>
 
-              <div className="card">
-                <p className="font-bold mb-2">初期費用のお振込・ご契約</p>
-                <p className="text-sm">
-                  審査通過後、弊社事務所にてご契約締結をさせていただきます。敷金礼金などの初期費用・仲介手数料などの初期費用のお振込もお願い致します。
-                </p>
+              <div className="card flex items-start gap-4">
+                <Image
+                  src="/images/flow-icon.webp"
+                  alt=""
+                  width={60}
+                  height={60}
+                  className="flex-shrink-0"
+                />
+                <div>
+                  <p className="font-bold mb-2">初期費用のお振込・ご契約</p>
+                  <p className="text-sm">
+                    審査通過後、弊社事務所にてご契約締結をさせていただきます。敷金礼金などの初期費用・仲介手数料などの初期費用のお振込もお願い致します。
+                  </p>
+                </div>
               </div>
 
-              <div className="card">
-                <p className="font-bold mb-2">鍵の引き渡し</p>
-                <p className="text-sm">
-                  ご契約開始日もしくは前日に、鍵の引き渡しを行います。鍵の引き渡しは弊社事務所で行います。
-                </p>
+              <div className="card flex items-start gap-4">
+                <Image
+                  src="/images/flow-icon.webp"
+                  alt=""
+                  width={60}
+                  height={60}
+                  className="flex-shrink-0"
+                />
+                <div>
+                  <p className="font-bold mb-2">鍵の引き渡し</p>
+                  <p className="text-sm">
+                    ご契約開始日もしくは前日に、鍵の引き渡しを行います。鍵の引き渡しは弊社事務所で行います。
+                  </p>
+                </div>
               </div>
             </div>
 
